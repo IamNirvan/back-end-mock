@@ -35,10 +35,10 @@ def test_endpoint():
             "status": "error"
         }), 500
 
-# Vercel-specific handler
+# Vercel serverless function handler
 def handler(event, context):
     return app(event, context)
 
-# For local development
+# Allow running locally for testing
 if __name__ == '__main__':
     app.run(debug=True)

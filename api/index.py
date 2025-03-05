@@ -4,6 +4,16 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/', methods=['GET'])
+def root():
+    """
+    Root endpoint for checking if the service is alive
+    """
+    return jsonify({
+        "message": "Service is running",
+        "status": "success"
+    }), 200
+
 @app.route('/api/test-endpoint', methods=['POST'])
 def test_endpoint():
     """

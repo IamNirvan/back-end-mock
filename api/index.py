@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/api/test-endpoint', methods=['POST'])
 def test_endpoint():
@@ -33,6 +35,10 @@ def test_endpoint():
             "status": "error"
         }), 500
 
-# This is needed for Vercel serverless functions
+# Vercel-specific handler
 def handler(event, context):
-    return app
+    return app(event, context)
+
+# For local development
+if __name__ == '__main__':
+    app.run(debug=True)
